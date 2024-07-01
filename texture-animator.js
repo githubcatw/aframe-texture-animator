@@ -38,17 +38,18 @@ AFRAME.registerComponent('texture-animator', {
 		this.tilesVertical = this.data.vtiles;
 		// how many images does this spritesheet contain?
 		//  usually equals tilesHoriz * tilesVert, but not necessarily,
-		//  if there at blank tiles at the bottom of the spritesheet. 
+		//  if there at blank tiles at the bottom of the spritesheet.
 
 		this.numberOfTiles = this.data.tiles;
-		this.texture = new THREE.ImageUtils.loadTexture( this.data.src ); // Gets the texture from the element
+        var loader = new THREE.TextureLoader();
+		this.texture = loader.load( this.data.src ); // Gets the texture from the element
 		//this.texture = this.el.getObject3D('mesh').material.map;
 
 		// Set image to doubleSide:
 		this.el.object3DMap.mesh.material.map = this.texture;
 		this.el.object3DMap.mesh.material.side = THREE.DoubleSide;
 
-		this.texture.wrapS = this.texture.wrapT = THREE.RepeatWrapping; 
+		this.texture.wrapS = this.texture.wrapT = THREE.RepeatWrapping;
 		this.texture.repeat.set( 1 / this.tilesHorizontal, 1 / this.tilesVertical );
 
 		// how long should each image be displayed?
